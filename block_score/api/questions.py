@@ -26,12 +26,16 @@ class Questions():
 	# answers - 
 	def score(self, verification_id, question_set_id, answers, options = {}):
 		body = options['body'] if 'body' in options else {}
-		req_body = {
+
+		# set request type to json for this as server parses questions as json
+		options['request_type'] = 'json'
+
+		# make the body one json object
+		body = {
 			'verification_id': verification_id,
 			'question_set_id': question_set_id,
 			'answers': answers
 		}
-		body = req_body#json.dumps(req_body)
 
 		response = self.client.post('/questions/score', body, options)
 
