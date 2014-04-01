@@ -19,7 +19,7 @@ class HttpClient():
 
 		self.options = {
 			'base': 'https://api.blockscore.com/',
-			'user_agent': 'alpaca/0.2.0 (https://github.com/pksunkara/alpaca)'
+			'user_agent': 'blockscore-python/1.0.0 (https://github.com/BlockScore/blockscore-python)'
 		}
 
 		self.options.update(options)
