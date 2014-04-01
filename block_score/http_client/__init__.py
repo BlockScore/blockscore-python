@@ -18,7 +18,7 @@ class HttpClient():
 	def __init__(self, auth, options):
 
 		self.options = {
-			'base': 'http://0.0.0.0:3000',
+			'base': 'https://api.blockscore.com/',
 			'user_agent': 'alpaca/0.2.0 (https://github.com/pksunkara/alpaca)'
 		}
 
