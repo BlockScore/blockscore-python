@@ -2,6 +2,7 @@ from .http_client import HttpClient
 
 # Assign all the api classes
 from .api.verifications import Verifications
+from .api.questions import Questions
 
 class Client():
 
@@ -12,4 +13,9 @@ class Client():
 	#
 	def verifications(self):
 		return Verifications(self.http_client)
+
+	# 
+	#
+	def questions(self):
+		return Questions(self.http_client)
 

@@ -36,7 +36,12 @@ class RequestHandler():
 
 	@staticmethod
 	def set_body(request):
-		typ = request['request_type'] if 'request_type' in request else 'raw'
+		typ = request['request_type'] if 'request_type' in request else 'form'
+
+		# Encoding request body into JSON format
+		if typ == 'json':
+			request['data'] = json.dumps(request['data'])
+			request['headers']['content-type'] = 'application/json'
 
 		# Encoding body into form-urlencoded format
 		if typ == 'form':

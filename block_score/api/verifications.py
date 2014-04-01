@@ -31,19 +31,22 @@ class Verifications():
 	# id - 
 	def retrieve(self, id, options = {}):
 		body = options['query'] if 'query' in options else {}
-		body['id'] = id
-
-		response = self.client.get('/verifications/:id', body, options)
+		
+		response = self.client.get('/verifications/'+str(id), body, options)
 
 		return response
 
 	# 
 	# '/verifications' GET
 	#
-	def list(self, options = {}):
+	def list(self, count=None, offset=None, options = {}):
 		body = options['query'] if 'query' in options else {}
+
+		if count != None:
+			body['count'] = count
+		if offset != None:
+			body['offset'] = offset
 
 		response = self.client.get('/verifications', body, options)
 
 		return response
-

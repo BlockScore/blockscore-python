@@ -85,6 +85,12 @@ body = 'username=pksunkara'
 body = {'user': 'pksunkara'}
 ```
 
+##### JSON request
+
+```python
+body = {'user': 'pksunkara'}
+```
+
 ### Client Options
 
 The following options are available while instantiating a client:
@@ -152,6 +158,42 @@ The following arguments are required:
 
 ```python
 response = verifications.list("", "", options)
+```
+
+###  api
+
+
+
+
+
+```python
+questions = client.questions()
+```
+
+#####  (POST /questions)
+
+
+
+The following arguments are required:
+
+ * __verification_id__: 
+
+```python
+response = questions.new("", options)
+```
+
+#####  (POST /questions/score)
+
+
+
+The following arguments are required:
+
+ * __verification_id__: 
+ * __question_set_id__: 
+ * __answers__: 
+
+```python
+response = questions.score("", "", "", options)
 ```
 
 ## Contributors
