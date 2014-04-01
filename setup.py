@@ -8,7 +8,7 @@ except ImportError:
 
 setup(
 	name='blockscore',
-	version='0.1.0',
+	version='1.0.0',
 	description='Official BlockScore API library client for python',
 	author='John Backus',
 	author_email='john@blockscore.com',
@@ -18,8 +18,9 @@ setup(
 		'requests >= 2.1.0'
 	],
 	packages=[
-		'block_score'
+		'blockscore'
 	],
+	package_data = {'blockscore': ['api/*', 'error/*','http_client/*']},
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',
 		'Intended Audience :: Developers',
