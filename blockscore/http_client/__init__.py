@@ -19,8 +19,7 @@ class HttpClient():
 	def __init__(self, auth, options):
 
 		self.options = {
-			#'base': 'https://api.blockscore.com/',
-			'base': 'http://localhost:3000',
+			'base': 'https://api.blockscore.com/',
 			'user_agent': 'blockscore-python/1.0.0 (https://github.com/BlockScore/blockscore-python)'
 		}
 
