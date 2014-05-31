@@ -9,7 +9,7 @@ class AuthHandler():
 	# Calculating the Authentication Type
 	def get_auth_type(self):
 
-		if 'username' in self.auth:
+		if 'api_key' in self.auth:
 			self.auth['password'] = '' # Password is not checked/required at the moment
 			return self.HTTP_PASSWORD
 
@@ -31,8 +31,8 @@ class AuthHandler():
 
 		return request
 
-	# Basic Authorization with username and password
+	# Basic Authorization with api_key and password
 	def http_password(self, request):
-		request['auth'] = (self.auth['username'], self.auth['password'])
+		request['auth'] = (self.auth['api_key'], self.auth['password'])
 		return request
 

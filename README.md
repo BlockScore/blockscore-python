@@ -16,7 +16,7 @@ pip install blockscore
 
 ```python
 import blockscore
-client = blockscore.Client({'username':'Your API Key'})
+client = blockscore.Client({'api_key':'Your API Key'})
 ```
 
 ## Verifications
