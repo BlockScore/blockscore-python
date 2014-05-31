@@ -20,6 +20,10 @@ class BlockscoreError(Exception):
 		self.http_status = http_status
 		self.json_body = json_body
 
+	def __str__(self):
+		return "Status: {0}. Type: {1}, Message: {2}" \
+			.format(self.http_status, self.error_type, self.message)
+
 
 # Input could not be validated.
 class ValidationError(BlockscoreError):
@@ -35,6 +39,11 @@ class ValidationError(BlockscoreError):
 
 		self.error_code = error_code
 		self.param = param
+
+	def __str__(self):
+		return "Status: {0}. Type: {1}, Param: {2}, Code: {3}, Message: {4}" \
+			.format(self.http_status, self.error_type, self.param,
+					self.error_code, self.message)
 
 
 # Required parameter missing

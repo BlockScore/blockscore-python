@@ -55,7 +55,7 @@ class ErrorHandler():
 			else:
 				raise ParameterError(message, body, error_type)
 
-		# Trying to access non-existent endpoint
+		# Trying to access nonexistent endpoint
 		elif code == 404:
 			raise NotFoundError(message, body, error_type)
 
