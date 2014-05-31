@@ -1,7 +1,7 @@
 import json
 # 
 #
-class Questions():
+class QuestionSet():
 
 	def __init__(self, client):
 		self.client = client
@@ -10,7 +10,7 @@ class Questions():
 	# '/questions' POST
 	#
 	# verification_id - 
-	def new(self, verification_id, options = {}):
+	def create(self, verification_id, options = {}):
 		body = options['body'] if 'body' in options else {}
 		body['verification_id'] = verification_id
 

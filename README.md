@@ -24,28 +24,28 @@ client = blockscore.Client({'api_key':'Your API Key'})
 ### List all verifications
 
 ```python
-verification_list = client.verifications().list()
+verification_list = client.verification.all()
 verification_list = verification_list.body
 ```
 
 ### List `5` verifications
 
 ```python
-verification_list = client.verifications().list(count=5)
+verification_list = client.verification.all(count=5)
 verification_list = verification_list.body
 ```
     
 ### View a verification by ID
 
 ```python
-verification = client.verifications().retrieve(verification_id)
+verification = client.verification.retrieve(verification_id)
 verification = verification.body
 ```
 
 ### Create a new verification
 
 ```python
-verification = client.verifications().new('us_citizen','1980-01-01',{'ssn': '1234'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country': 'us'})
+verification = client.verification.create('us_citizen','1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country': 'us'})
 verification = verification.body
 ```
 
@@ -54,14 +54,14 @@ verification = verification.body
 ### Create a new question set
 
 ```python
-question_set = client.questions().new(verification_id)
+question_set = client.question_set.create(verification_id)
 question_set = question_set.body
 ```
 
 ### Score a question set
 
 ```python
-score = self.client.questions().score(verif_id, qset_id, [
+score = self.client.question_set.score(verif_id, qset_id, [
 	{'question_id':1, 'answer_id':1},
 	{'question_id':2, 'answer_id':1},
 	{'question_id':3, 'answer_id':1},

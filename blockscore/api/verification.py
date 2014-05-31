@@ -1,6 +1,6 @@
 # Returns user api instance
 #
-class Verifications():
+class Verification():
 
 	def __init__(self, client):
 		self.client = client
@@ -13,7 +13,7 @@ class Verifications():
 	# identification - 
 	# name - 
 	# address - 
-	def new(self, type, date_of_birth, identification, name, address, options = {}):
+	def create(self, type, date_of_birth, identification, name, address, options = {}):
 		body = options['body'] if 'body' in options else {}
 		body['type'] = type
 		body['date_of_birth'] = date_of_birth
@@ -39,7 +39,7 @@ class Verifications():
 	# 
 	# '/verifications' GET
 	#
-	def list(self, count=None, offset=None, options = {}):
+	def all(self, count=None, offset=None, options = {}):
 		body = options['query'] if 'query' in options else {}
 
 		if count != None:
