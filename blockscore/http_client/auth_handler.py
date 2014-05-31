@@ -9,7 +9,8 @@ class AuthHandler():
 	# Calculating the Authentication Type
 	def get_auth_type(self):
 
-		if 'username' in self.auth and 'password' in self.auth:
+		if 'username' in self.auth:
+			self.auth['password'] = '' # Password is not checked/required at the moment
 			return self.HTTP_PASSWORD
 
 		return -1
