@@ -8,7 +8,7 @@ STATUS_CODES = {
 	'InternalError': 500
 }
 
-# Exceptions
+# Generic Exception
 class BlockscoreError(Exception):
 	
 	def __init__(self, message=None, json_body=None, http_status=None,
@@ -21,6 +21,7 @@ class BlockscoreError(Exception):
 		self.json_body = json_body
 
 
+# Input could not be validated.
 class ValidationError(BlockscoreError):
 
 	def __init__(self, message=None, json_body=None, param=None, 
@@ -36,6 +37,7 @@ class ValidationError(BlockscoreError):
 		self.param = param
 
 
+# Required parameter missing
 class ParameterError(BlockscoreError):
 
 	def __init__(self, message=None, json_body=None, error_type=None):
@@ -46,6 +48,7 @@ class ParameterError(BlockscoreError):
 				http_status=status_code, json_body=json_body)
 
 
+# Invalid API Key
 class AuthorizationError(BlockscoreError):
 
 	def __init__(self, message=None, json_body=None, error_type=None):
@@ -56,6 +59,7 @@ class AuthorizationError(BlockscoreError):
 				http_status=status_code, json_body=json_body)
 
 
+# Tried to reference a nonexistent endpoint
 class NotFoundError(BlockscoreError):
 
 	def __init__(self, message=None, json_body=None, error_type=None):
@@ -66,6 +70,7 @@ class NotFoundError(BlockscoreError):
 				http_status=status_code, json_body=json_body)
 
 
+# Error on the Blockscore API
 class InternalServerError(BlockscoreError):
 
 	def __init__(self, message=None, json_body=None, error_type=None):
