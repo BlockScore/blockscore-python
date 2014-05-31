@@ -11,6 +11,7 @@ from .error_handler import ErrorHandler
 from .request_handler import RequestHandler
 from .response import Response
 from .response_handler import ResponseHandler
+from ..error import BlockscoreError
 
 # Main HttpClient which is used by Api classes
 class HttpClient():
@@ -108,7 +109,12 @@ class HttpClient():
 		if 'response_type' in options:
 			del options['response_type']
 
-		return requests.request(method, path, **options)
+		try:
+			response = requests.request(method, path, **options)
+		except BlockscoreError as e:
+			raise
+		
+		return response
 
 	# Get response body in correct format
 	def get_body(self, response):
