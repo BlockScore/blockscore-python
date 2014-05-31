@@ -1,5 +1,4 @@
-from ..error import ClientError
-from ..error.error import BlockscoreError, AuthorizationError, \
+from ..error import BlockscoreError, AuthorizationError, \
 			InternalServerError, ValidationError, ParameterError, NotFoundError
 from .response_handler import ResponseHandler
 
