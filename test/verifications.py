@@ -5,11 +5,13 @@ import blockscore
 import unittest
 import os, sys
 
+blockscore.api_key = 'your_api_key'
+
 class TestBlockscore(unittest.TestCase):
 
     def setUp(self):
         try:
-            api_key = os.environ['BLOCKSCORE_API']
+            api_key = blockscore.api_key
             self.client = blockscore.Client({'api_key':api_key})
         except KeyError:
             sys.stderr.write("To run tests, you must have a BLOCKSCORE_API environment variable with a test api key\n")
@@ -23,7 +25,7 @@ class TestBlockscore(unittest.TestCase):
     def test_retrieve_verification(self):
         verif = self.client.verification.create(*self.test_identity)
         verif_id = verif.body['id']
-        verif2 = self.client.verifications().retrieve(verif_id)
+        verif2 = self.client.verification.retrieve(verif_id)
         self.assertEqual(verif.body, verif2.body)
 
     def test_list_verification(self):
