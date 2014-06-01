@@ -87,7 +87,7 @@ class HttpClient():
 		if method != 'get':
 			kwargs = self.set_body(kwargs)
 
-		kwargs['hooks'] = dict(response=ErrorHandler.check_error)
+		kwargs['hooks'] = dict(response=ErrorHandler().check_error)
 
 		kwargs = self.auth.set(kwargs)
 
