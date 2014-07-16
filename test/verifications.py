@@ -9,7 +9,7 @@ class TestBlockscore(unittest.TestCase):
 
     def setUp(self):
         try:
-            self.client = blockscore.Client({'api_key': 'your_api_key'})
+            self.client = blockscore.Client({'api_key': os.environ['BLOCKSCORE_API']})
         except KeyError:
             sys.stderr.write("To run tests, you must have a BLOCKSCORE_API environment variable with a test api key\n")
             sys.exit(2)
