@@ -45,7 +45,7 @@ verification = verification.body
 ### Create a new verification
 
 ```python
-verification = client.verification.create('us_citizen','1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country': 'us'})
+verification = client.verification.create('1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'})
 verification = verification.body
 ```
 
