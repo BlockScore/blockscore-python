@@ -52,7 +52,7 @@ class TestBlockscore(unittest.TestCase):
         verif_id = verif['id']
         qset = self.client.question_set.create(verif_id)
         qset = qset.body
-        qset_id = qset['question_set_id']
+        qset_id = qset['id']
         score = self.client.question_set.score(verif_id, qset_id, [
             {'question_id':1, 'answer_id':1},
             {'question_id':2, 'answer_id':1},
@@ -61,7 +61,7 @@ class TestBlockscore(unittest.TestCase):
             {'question_id':5, 'answer_id':1}
         ])
         score = score.body
-        self.assertEqual(score['question_set_id'],qset_id)
+        self.assertEqual(score['id'],qset_id)
         self.assertIsInstance(score['score'],float)
 
 
