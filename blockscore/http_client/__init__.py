@@ -20,7 +20,7 @@ class HttpClient():
 
 		self.options = {
 			'base': 'https://api.blockscore.com/',
-			'user_agent': 'blockscore-python/1.0.0 (https://github.com/BlockScore/blockscore-python)'
+			'user_agent': 'blockscore-python/3.0.0 (https://github.com/BlockScore/blockscore-python)'
 		}
 
 		self.options.update(options)
@@ -28,7 +28,7 @@ class HttpClient():
 		self.base = self.options['base']
 
 		self.headers = {
-			'Accept': 'application/vnd.blockscore+json;version=2',
+			'Accept': 'application/vnd.blockscore+json;version=3',
 			'user-agent': self.options['user_agent']
 		}
 
