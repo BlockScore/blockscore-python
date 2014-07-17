@@ -9,15 +9,15 @@ class TestBlockscore(unittest.TestCase):
 
     def setUp(self):
         try:
-            self.client = blockscore.Client({'api_key': 'your_api_key'})
+            self.client = blockscore.Client({'api_key': os.environ['BLOCKSCORE_API']})
         except KeyError:
             sys.stderr.write("To run tests, you must have a BLOCKSCORE_API environment variable with a test api key\n")
             sys.exit(2)
-        self.test_identity = ['us_citizen','1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country': 'us'}]
+        self.test_identity = ['1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'}]
 
     def test_create_verification(self):
         verif = self.client.verification.create(*self.test_identity)
-        self.assertEqual(verif.body['date_of_birth'], self.test_identity[1])
+        self.assertEqual(verif.body['date_of_birth'], self.test_identity[0])
 
     def test_retrieve_verification(self):
         verif = self.client.verification.create(*self.test_identity)
@@ -52,7 +52,7 @@ class TestBlockscore(unittest.TestCase):
         verif_id = verif['id']
         qset = self.client.question_set.create(verif_id)
         qset = qset.body
-        qset_id = qset['question_set_id']
+        qset_id = qset['id']
         score = self.client.question_set.score(verif_id, qset_id, [
             {'question_id':1, 'answer_id':1},
             {'question_id':2, 'answer_id':1},
@@ -61,7 +61,7 @@ class TestBlockscore(unittest.TestCase):
             {'question_id':5, 'answer_id':1}
         ])
         score = score.body
-        self.assertEqual(score['question_set_id'],qset_id)
+        self.assertEqual(score['id'],qset_id)
         self.assertIsInstance(score['score'],float)
 
 
