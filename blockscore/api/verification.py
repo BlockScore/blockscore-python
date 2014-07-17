@@ -8,14 +8,12 @@ class Verification():
 	# 
 	# '/verifications' POST
 	#
-	# type - 
 	# date_of_birth - 
 	# identification - 
 	# name - 
 	# address - 
-	def create(self, type, date_of_birth, identification, name, address, options = {}):
+	def create(self, date_of_birth, identification, name, address, options = {}):
 		body = options['body'] if 'body' in options else {}
-		body['type'] = type
 		body['date_of_birth'] = date_of_birth
 		body['identification'] = identification
 		body['name'] = name

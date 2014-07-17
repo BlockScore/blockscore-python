@@ -13,11 +13,11 @@ class TestBlockscore(unittest.TestCase):
         except KeyError:
             sys.stderr.write("To run tests, you must have a BLOCKSCORE_API environment variable with a test api key\n")
             sys.exit(2)
-        self.test_identity = ['us_citizen','1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'}]
+        self.test_identity = ['1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'}]
 
     def test_create_verification(self):
         verif = self.client.verification.create(*self.test_identity)
-        self.assertEqual(verif.body['date_of_birth'], self.test_identity[1])
+        self.assertEqual(verif.body['date_of_birth'], self.test_identity[0])
 
     def test_retrieve_verification(self):
         verif = self.client.verification.create(*self.test_identity)
