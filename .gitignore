@@ -19,3 +19,4 @@ pip-log.txt
 .tox
 nosetests.xml
 *.sublime-workspace
+*.sublime-project
