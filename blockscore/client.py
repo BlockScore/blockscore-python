@@ -3,6 +3,7 @@ from .http_client import HttpClient
 # Assign all the api classes
 from .api.verification import Verification
 from .api.question_set import QuestionSet
+from .api.companies import Companies
 
 class Client():
 
@@ -10,3 +11,5 @@ class Client():
 		self.http_client = HttpClient(auth, options)
 		self.verification = Verification(self.http_client)
 		self.question_set = QuestionSet(self.http_client)
+		self.companies = Companies(self.http_client)
+
