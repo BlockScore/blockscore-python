@@ -8,7 +8,7 @@ except ImportError:
 
 setup(
   name='blockscore',
-  version='3.0.0',
+  version='3.1.0',
   description='Official BlockScore API library client for python',
   author='John Backus',
   author_email='john@blockscore.com',
