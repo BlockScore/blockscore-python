@@ -19,34 +19,51 @@ import blockscore
 client = blockscore.Client({'api_key':'Your API Key'})
 ```
 
-## Verifications
-    
-### List all verifications
+## People
+
+### List all people
 
 ```python
-verification_list = client.verification.all()
-verification_list = verification_list.body
+people_list = client.people.all()
+people_list = people_list.body
 ```
 
-### List `5` verifications
+### List `5` people
 
 ```python
-verification_list = client.verification.all(count=5)
-verification_list = verification_list.body
-```
-    
-### View a verification by ID
-
-```python
-verification = client.verification.retrieve(verification_id)
-verification = verification.body
+people_list = client.people.all(count=5)
+people_list = people_list.body
 ```
 
-### Create a new verification
+### View a person by ID
 
 ```python
-verification = client.verification.create('1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'})
-verification = verification.body
+person = client.people.retrieve(person_id)
+person = person.body
+```
+
+### Create a new person
+
+```python
+test_identity = {
+            "name_first": "John",
+            "name_middle": "Pearce",
+            "name_last": "Doe",
+            "birth_day": "23",
+            "birth_month": "8",
+            "birth_year": "1980",
+            "document_type": "ssn",
+            "document_value": "0000",
+            "address_street1": "1 Infinite Loop",
+            "address_street2": "Apt 6",
+            "address_city": "Cupertino",
+            "address_subdivision": "CA",
+            "address_postal_code": "95014",
+            "address_country_code": "US",
+        }
+
+person = client.people.create(test_identity)
+person = person.body
 ```
 
 ## Question Sets
@@ -54,14 +71,14 @@ verification = verification.body
 ### Create a new question set
 
 ```python
-question_set = client.question_set.create(verification_id)
+question_set = client.question_sets.create(person_id)
 question_set = question_set.body
 ```
 
 ### Score a question set
 
 ```python
-score = self.client.question_set.score(verif_id, qset_id, [
+score = self.client.question_sets.score(qset_id, [
 	{'question_id':1, 'answer_id':1},
 	{'question_id':2, 'answer_id':1},
 	{'question_id':3, 'answer_id':1},
@@ -90,7 +107,7 @@ score = score.body
 
 
 ## Contributing to BlockScore
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.

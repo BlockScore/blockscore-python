@@ -1,3 +1,4 @@
 # Import all the classes into api module
-from . import verification
-from . import question_set
+from blockscore.api import people
+from blockscore.api import question_sets
+from blockscore.api import companies
