@@ -1,4 +1,3 @@
-import json
 
 STATUS_CODES = {
 	'ValidationError': 400,
@@ -10,7 +9,7 @@ STATUS_CODES = {
 
 # Generic Exception
 class BlockscoreError(Exception):
-	
+
 	def __init__(self, message=None, json_body=None, http_status=None,
 				 error_type=None, param=None, error_code=None):
 		super(BlockscoreError, self).__init__(message)
@@ -28,7 +27,7 @@ class BlockscoreError(Exception):
 # Input could not be validated.
 class ValidationError(BlockscoreError):
 
-	def __init__(self, message=None, json_body=None, param=None, 
+	def __init__(self, message=None, json_body=None, param=None,
 				 error_type=None, error_code=None):
 
 		status_code = STATUS_CODES['ValidationError']
@@ -90,3 +89,4 @@ class InternalServerError(BlockscoreError):
 				http_status=status_code, json_body=json_body)
 
 	pass
+

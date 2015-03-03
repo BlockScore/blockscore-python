@@ -1,43 +1,56 @@
-import json
-# 
-#
+
+QUESTION_SET_PATH = '/question_sets'
+
 class QuestionSet():
 
 	def __init__(self, client):
 		self.client = client
 
-	# 
-	# '/questions' POST
 	#
-	# verification_id - 
-	def create(self, verification_id, options = {}):
+	# '/question_sets' POST
+	#
+	# verification_id -
+	def create(self, person_id, options = {}):
 		body = options['body'] if 'body' in options else {}
-		body['verification_id'] = verification_id
+		body['person_id'] = person_id
 
-		response = self.client.post('/questions', body, options)
-
+		response = self.client.post(QUESTION_SET_PATH, body)
 		return response
 
-	# 
-	# '/questions/score' POST
 	#
-	# verification_id - 
-	# question_set_id - 
-	# answers - 
-	def score(self, verification_id, question_set_id, answers, options = {}):
-		body = options['body'] if 'body' in options else {}
+	# '/question_sets/:id/:score' POST
+	#
+	# answers -
+	def score(self, id, answers):
+		body = {}
+		body['answers'] = answers
 
-		# set request type to json for this as server parses questions as json
+		options = {}
 		options['request_type'] = 'json'
 
-		# make the body one json object
-		body = {
-			'verification_id': verification_id,
-			'question_set_id': question_set_id,
-			'answers': answers
-		}
+		response = self.client.post('%s/%s/score' % (QUESTION_SET_PATH, str(id)), body, options)
+		return response
 
-		response = self.client.post('/questions/score', body, options)
+	#
+	# '/question_sets/:id' GET
+	#
+	# id -
+	def retrieve(self, id):
+		body = {}
+		response = self.client.get('%s/%s' % (QUESTION_SET_PATH, str(id)), body)
+		return response
 
+	#
+	# '/question_sets' GET
+	#
+	def all(self, count=None, offset=None, options = {}):
+		body = options['body'] if 'body' in options else {}
+
+		if count:
+			body['count'] = count
+		if offset:
+			body['offset'] = offset
+
+		response = self.client.get(QUESTION_SET_PATH, body)
 		return response
 

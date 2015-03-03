@@ -4,3 +4,4 @@ class Response():
 		self.body = body
 		self.code = code
 		self.headers = headers
+

@@ -13,47 +13,63 @@ class TestBlockscore(unittest.TestCase):
         except KeyError:
             sys.stderr.write("To run tests, you must have a BLOCKSCORE_API environment variable with a test api key\n")
             sys.exit(2)
-        self.test_identity = ['1980-01-01',{'ssn': '0000'},{'first': 'john', 'last': 'doe'},{'street1': '1 Infinite Loop', 'city': 'Palo Alto', 'state': 'ca', 'postal_code': '94309', 'country_code': 'us'}]
 
-    def test_create_verification(self):
-        verif = self.client.verification.create(*self.test_identity)
-        self.assertEqual(verif.body['date_of_birth'], self.test_identity[0])
+        self.test_identity = {
+            "name_first": "John",
+            "name_middle": "Pearce",
+            "name_last": "Doe",
+            "birth_day": "23",
+            "birth_month": "8",
+            "birth_year": "1980",
+            "document_type": "ssn",
+            "document_value": "0000",
+            "address_street1": "1 Infinite Loop",
+            "address_street2": "Apt 6",
+            "address_city": "Cupertino",
+            "address_subdivision": "CA",
+            "address_postal_code": "95014",
+            "address_country_code": "US",
+        }
+    def test_create_person(self):
+        response = self.client.people.create(self.test_identity)
+        self.assertEqual(response.body['name_first'], self.test_identity['name_first'])
+        self.assertEqual(response.body['name_last'], self.test_identity['name_last'])
 
-    def test_retrieve_verification(self):
-        verif = self.client.verification.create(*self.test_identity)
+    def test_retrieve_person(self):
+        verif = self.client.people.create(self.test_identity)
         verif_id = verif.body['id']
-        verif2 = self.client.verification.retrieve(verif_id)
+        verif2 = self.client.people.retrieve(verif_id)
         self.assertEqual(verif.body, verif2.body)
 
-    def test_list_verification(self):
-        verif1 = self.client.verification.create(*self.test_identity)
-        verif2 = self.client.verification.create(*self.test_identity)
-        verif3 = self.client.verification.create(*self.test_identity)
-        verif_list = self.client.verification.all(count=3)
+    def test_list_people(self):
+        self.client.people.create(self.test_identity)
+        self.client.people.create(self.test_identity)
+        self.client.people.create(self.test_identity)
+        verif_list = self.client.people.all(count=3)
         verif_list = verif_list.body
         self.assertTrue(len(verif_list) >= 3)
-        verif_list2 = self.client.verification.all(count=3,offset=3)
+        verif_list2 = self.client.people.all(count=3,offset=3)
         verif_list2 = verif_list2.body
         self.assertNotEqual(verif_list, verif_list2)
 
 
 
     def test_create_questions(self):
-        verif = self.client.verification.create(*self.test_identity)
+        verif = self.client.people.create(self.test_identity)
         verif = verif.body
         verif_id = verif['id']
         qset = self.client.question_set.create(verif_id)
         qset = qset.body
-        self.assertEqual(qset['verification_id'],verif_id)
+        self.assertEqual(qset['person_id'],verif_id)
 
     def test_score_questions(self):
-        verif = self.client.verification.create(*self.test_identity)
+        verif = self.client.people.create(self.test_identity)
         verif = verif.body
         verif_id = verif['id']
         qset = self.client.question_set.create(verif_id)
         qset = qset.body
         qset_id = qset['id']
-        score = self.client.question_set.score(verif_id, qset_id, [
+        score = self.client.question_set.score(qset_id, [
             {'question_id':1, 'answer_id':1},
             {'question_id':2, 'answer_id':1},
             {'question_id':3, 'answer_id':1},
@@ -87,3 +103,4 @@ class TestBlockscore(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

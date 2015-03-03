@@ -11,3 +11,4 @@ class ResponseHandler():
 			body = response.json()
 
 		return body
+

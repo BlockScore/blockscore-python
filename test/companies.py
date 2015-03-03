@@ -17,24 +17,22 @@ class TestBlockscoreCompanies(unittest.TestCase):
         self.test_company = {
             "entity_name": "BlockScore",
             "tax_id": "123410000",
-            "incorp_date": "1980-08-25",
-            "incorp_state": "DE",
-            "incorp_country_code": "US",
-            "incorp_type": "corporation",
+            "incorporation_date": "1980-08-25",
+            "incorporation_state": "DE",
+            "incorporation_country_code": "US",
+            "incorporation_type": "corporation",
             "dbas": "BitRemite",
             "registration_number": "123123123",
             "email": "test@example.com",
             "url": "https://blockscore.com",
             "phone_number": "6505555555",
             "ip_address": "67.160.8.182",
-            "address": {
-                "street1": "1 Infinite Loop",
-                "street2": None,
-                "city": "Cupertino",
-                "state": "CA",
-                "postal_code": "95014",
-                "country_code": "US",
-            }
+            "address_street1": "1 Infinite Loop",
+            "address_street2": None,
+            "address_city": "Cupertino",
+            "address_subdivision": "CA",
+            "address_postal_code": "95014",
+            "address_country_code": "US",
         }
 
     def test_list_companies(self):

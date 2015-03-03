@@ -6,12 +6,12 @@ try:
 except ImportError:
 	import urllib.parse as urlparse
 
-from .auth_handler import AuthHandler
-from .error_handler import ErrorHandler
-from .request_handler import RequestHandler
-from .response import Response
-from .response_handler import ResponseHandler
-from ..error import BlockscoreError
+from blockscore.error import BlockscoreError
+from blockscore.http_client.auth_handler import AuthHandler
+from blockscore.http_client.error_handler import ErrorHandler
+from blockscore.http_client.request_handler import RequestHandler
+from blockscore.http_client.response import Response
+from blockscore.http_client.response_handler import ResponseHandler
 
 # Main HttpClient which is used by Api classes
 class HttpClient():
@@ -20,7 +20,7 @@ class HttpClient():
 
 		self.options = {
 			'base': 'https://api.blockscore.com/',
-			'user_agent': 'blockscore-python/3.0.0 (https://github.com/BlockScore/blockscore-python)'
+			'user_agent': 'blockscore-python/4.0.0 (https://github.com/BlockScore/blockscore-python)'
 		}
 
 		self.options.update(options)
@@ -28,7 +28,7 @@ class HttpClient():
 		self.base = self.options['base']
 
 		self.headers = {
-			'Accept': 'application/vnd.blockscore+json;version=3',
+			'Accept': 'application/vnd.blockscore+json;version=4',
 			'user-agent': self.options['user_agent']
 		}
 
@@ -111,9 +111,9 @@ class HttpClient():
 
 		try:
 			response = requests.request(method, path, **options)
-		except BlockscoreError as e:
+		except BlockscoreError:
 			raise
-		
+
 		return response
 
 	# Get response body in correct format
@@ -131,3 +131,4 @@ class HttpClient():
 	# Make a function for lowercase
 	def key_lower(self, key):
 		return key.lower()
+
