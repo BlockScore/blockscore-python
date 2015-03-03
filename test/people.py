@@ -58,7 +58,7 @@ class TestBlockscore(unittest.TestCase):
         verif = self.client.people.create(self.test_identity)
         verif = verif.body
         verif_id = verif['id']
-        qset = self.client.question_set.create(verif_id)
+        qset = self.client.question_sets.create(verif_id)
         qset = qset.body
         self.assertEqual(qset['person_id'],verif_id)
 
@@ -66,10 +66,10 @@ class TestBlockscore(unittest.TestCase):
         verif = self.client.people.create(self.test_identity)
         verif = verif.body
         verif_id = verif['id']
-        qset = self.client.question_set.create(verif_id)
+        qset = self.client.question_sets.create(verif_id)
         qset = qset.body
         qset_id = qset['id']
-        score = self.client.question_set.score(qset_id, [
+        score = self.client.question_sets.score(qset_id, [
             {'question_id':1, 'answer_id':1},
             {'question_id':2, 'answer_id':1},
             {'question_id':3, 'answer_id':1},
