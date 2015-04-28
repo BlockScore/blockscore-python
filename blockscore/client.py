@@ -4,6 +4,8 @@ from blockscore.http_client import HttpClient
 from blockscore.api.people import People
 from blockscore.api.question_sets import QuestionSets
 from blockscore.api.companies import Companies
+#from .api.verification import Verification
+from blockscore.api.watchlist import Watchlist
 
 class Client():
 
@@ -12,4 +14,6 @@ class Client():
     self.people = People(self.http_client)
     self.question_sets = QuestionSets(self.http_client)
     self.companies = Companies(self.http_client)
+    #self.verification = Verification(self.http_client)
+    self.watchlist = Watchlist(self.http_client)
 
