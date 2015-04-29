@@ -1,8 +1,8 @@
-WATCHLIST_CANDIDATE_URI = '/candidates'
-WATCHLIST_SEARCH_URI = '/watchlists'
+WATCHLISTS_CANDIDATE_URI = '/candidates'
+WATCHLISTS_SEARCH_URI = '/watchlists'
 
 
-class Watchlist():
+class Watchlists():
   def __init__(self, client):
     self.client = client
 
@@ -31,31 +31,31 @@ class Watchlist():
 
   def create(self, **kwargs):
     body = self._create_body(**kwargs)
-    return self.client.post(WATCHLIST_CANDIDATE_URI, body)
+    return self.client.post(WATCHLISTS_CANDIDATE_URI, body)
 
-  def edit(self, watchlist_candidate_id, **kwargs):
+  def edit(self, watchlists_candidate_id, **kwargs):
     body = self._create_body(**kwargs)
-    return self.client.patch("%s/%s" % (WATCHLIST_CANDIDATE_URI,
-                      watchlist_candidate_id), body)
+    return self.client.patch("%s/%s" % (WATCHLISTS_CANDIDATE_URI,
+                      watchlists_candidate_id), body)
 
-  def retrieve(self, watchlist_candidate_id):
-    return self.client.get("%s/%s" % (WATCHLIST_CANDIDATE_URI,
-                      watchlist_candidate_id))
+  def retrieve(self, watchlists_candidate_id):
+    return self.client.get("%s/%s" % (WATCHLISTS_CANDIDATE_URI,
+                      watchlists_candidate_id))
 
-  def delete(self, watchlist_candidate_id):
-    return self.client.delete("%s/%s" % (WATCHLIST_CANDIDATE_URI,
-                       watchlist_candidate_id))
+  def delete(self, watchlists_candidate_id):
+    return self.client.delete("%s/%s" % (WATCHLISTS_CANDIDATE_URI,
+                       watchlists_candidate_id))
 
   def list(self, count=None, offset=None):
     body = {
       'count': count,
       'offset': offset
     }
-    return self.client.get(WATCHLIST_CANDIDATE_URI, body)
+    return self.client.get(WATCHLISTS_CANDIDATE_URI, body)
 
-  def search(self, watchlist_candidate_id, match_type=None):
+  def search(self, watchlists_candidate_id, match_type=None):
     body = {
-      'candidate_id': watchlist_candidate_id,
+      'candidate_id': watchlists_candidate_id,
       'match_type': match_type
     }
-    return self.client.post(WATCHLIST_SEARCH_URI, body)
+    return self.client.post(WATCHLISTS_SEARCH_URI, body)
